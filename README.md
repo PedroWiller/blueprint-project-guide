@@ -110,7 +110,7 @@ go-blueprint create --name my-project --framework chi --driver mysql --advanced 
             "type": "go",
             "request": "launch",
             "mode": "auto",
-            "program": "${workspaceFolder}/cmd",
+            "program": "${workspaceFolder}/cmd/api",
             "envFile": "${workspaceFolder}/.env",
             "env": {},
             "args": [],

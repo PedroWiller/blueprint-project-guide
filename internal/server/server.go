@@ -1,15 +1,17 @@
 package server
 
 import (
+	"blueprint-project/pkg/helpers"
+
 	"github.com/gofiber/fiber/v2"
 
-	"blueprint-project/internal/database"
+	"github.com/gofiber/fiber/v2/middleware/recover"
 )
 
 type FiberServer struct {
 	*fiber.App
 
-	db database.Service
+	// db database.Service
 }
 
 func New() *FiberServer {
@@ -17,10 +19,12 @@ func New() *FiberServer {
 		App: fiber.New(fiber.Config{
 			ServerHeader: "blueprint-project",
 			AppName:      "blueprint-project",
+			ErrorHandler: helpers.DefaultErrorHandler,
 		}),
-
-		db: database.New(),
+		// db: database.New(),
 	}
+
+	server.Use(recover.New())
 
 	return server
 }

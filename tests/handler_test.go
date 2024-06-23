@@ -1,35 +1,36 @@
 package tests
 
 import (
-	"blueprint-project/internal/server"
-	"github.com/gofiber/fiber/v2"
 	"io"
 	"net/http"
 	"testing"
+
+	"blueprint-project/internal/server"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 func TestHandler(t *testing.T) {
-	// Create a Fiber app for testing
 	app := fiber.New()
-	// Inject the Fiber app into the server
+
 	s := &server.FiberServer{App: app}
-	// Define a route in the Fiber app
+
 	app.Get("/", s.HelloWorldHandler)
-	// Create a test HTTP request
+
 	req, err := http.NewRequest("GET", "/", nil)
 	if err != nil {
 		t.Fatalf("error creating request. Err: %v", err)
 	}
-	// Perform the request
+
 	resp, err := app.Test(req)
 	if err != nil {
 		t.Fatalf("error making request to server. Err: %v", err)
 	}
-	// Your test assertions...
+
 	if resp.StatusCode != http.StatusOK {
 		t.Errorf("expected status OK; got %v", resp.Status)
 	}
-	expected := "{\"message\":\"Hello World\"}"
+	expected := "<h1>Welcome to blueprint project guide!</h1>"
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		t.Fatalf("error reading response body. Err: %v", err)

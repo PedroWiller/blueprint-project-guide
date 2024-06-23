@@ -99,3 +99,23 @@ Or all features at once:
 ```bash
 go-blueprint create --name my-project --framework chi --driver mysql --advanced --feature htmx --feature githubaction --feature websocket --feature tailwind
 ```
+
+
+```JSON
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/cmd",
+            "envFile": "${workspaceFolder}/.env",
+            "env": {},
+            "args": [],
+            "showLog": true
+        }
+    ]
+}
+```
